@@ -70,9 +70,12 @@ public class WindowManager extends JFrame {
 
         //affichage tableau
         JPanel panTable=new JPanel();
+
         panTable.setBorder((BorderFactory.createTitledBorder("Tableau des livres")));
+
         JTable tableau = new JTable(new Table(this.bibliotheque));
         panTable.add(tableau, BorderLayout.CENTER);
+
 
 
 
@@ -198,7 +201,7 @@ public class WindowManager extends JFrame {
                 FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter("xml files (*.xml)", "xml");
                 chooser.setApproveButtonText("Choix du fichier..."); //intitulé du bouton
                 chooser.setFileFilter(xmlfilter);
-                chooser.setFileSelectionMode(0);
+                chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 //chooser.showOpenDialog(null); //affiche la boite de dialogue
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {	
                     String path = chooser.getSelectedFile().getAbsolutePath();
