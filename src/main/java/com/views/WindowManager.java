@@ -7,8 +7,19 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.xml.bind.JAXBException;
 
 import com.models.Bibliotheque;
@@ -16,7 +27,8 @@ import com.models.Bibliotheque;
 public class WindowManager extends JFrame {
 
     private static final long serialVersionUID = 1L;
-    private Bibliotheque bibliotheque;
+    private Bibliotheque bibliotheque = new Bibliotheque();
+
     private JMenuBar menuBar = new JMenuBar();
     private JMenu file=new JMenu("Fichier");
     private JMenu Edition =new JMenu("Edition");
@@ -28,10 +40,12 @@ public class WindowManager extends JFrame {
     private JMenuItem SauvegarderSous = new JMenuItem("Sauvegarder Sous");
     private JMenuItem Info = new JMenuItem("informations");
 
-    private JButton ajouterBouton, supprimerBouton, applyBouton;
-    private JLabel livreLabel,auteurLabel, presentationLabel,rangeeLabel, colonneLabel, parutionLabel;
-    private JTextField livre,auteur,rangee, colonne, parution;
-    private JTextArea presentation;
+    private JButton ajouterBouton, supprimerBouton;
+    private JLabel livreLabel,auteurLabel, anneeLabel,rangeeLabel;
+    private JTextField livre,auteur, annee,rangee;
+
+    private JTable tableau;
+    private Table table;
 
 
 
@@ -39,7 +53,6 @@ public class WindowManager extends JFrame {
 
     public WindowManager(){
         //caracteristiques de la fenetre
-        this.bibliotheque = new Bibliotheque();
         this.setTitle("Gestion Livre");
         this.setSize(700,500);
         this.setLocationRelativeTo(null);
@@ -49,7 +62,7 @@ public class WindowManager extends JFrame {
 
 
 
-    private void initComponent(){
+    public void initComponent(){
         //implementation du menu a completer
         file.add(open);
         file.add(close);
@@ -70,12 +83,13 @@ public class WindowManager extends JFrame {
 
         //affichage tableau
         JPanel panTable=new JPanel();
-
         panTable.setBorder((BorderFactory.createTitledBorder("Tableau des livres")));
-
-        JTable tableau = new JTable(new Table(this.bibliotheque));
-        panTable.add(tableau, BorderLayout.CENTER);
-
+        table = new Table(bibliotheque);
+        table.fireTableDataChanged();
+        tableau = new JTable(table);
+        tableau.repaint();
+        JScrollPane test = new JScrollPane(tableau);
+        panTable.add(test, BorderLayout.CENTER);
 
 
 
@@ -92,19 +106,16 @@ public class WindowManager extends JFrame {
         panForm.setBorder((BorderFactory.createTitledBorder("Formulaire d'interaction")));
 
         livreLabel=new JLabel("Livre : ");
-        presentationLabel=new JLabel("Résumé : ");
+        anneeLabel=new JLabel("Année : ");
         auteurLabel=new JLabel("Auteur: ");
         rangeeLabel=new JLabel("rangée : ");
-        colonneLabel = new JLabel("colonne : ");
-        parutionLabel = new JLabel("parution : ");
-
         livre=new JTextField();
-        presentation = new JTextArea(5, 2);
-        presentation.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        annee=new JTextField();
         auteur=new JTextField();
         rangee=new JTextField();
-        colonne = new JTextField();
-        parution = new JTextField();
+
+
 
         Box BLivre=Box.createHorizontalBox();
         BLivre.setPreferredSize(new Dimension(200,25));
@@ -118,27 +129,16 @@ public class WindowManager extends JFrame {
         BAuteur.add(auteurLabel);
         BAuteur.add(auteur);
 
-        Box BParution=Box.createHorizontalBox();
-        BParution.setPreferredSize(new Dimension(100,25));
-        BParution.add(parutionLabel);
-        BParution.add(parution);
 
-        Box BPresentation = Box.createHorizontalBox();
-        BPresentation.setPreferredSize(new Dimension(100,100));
-        BPresentation.add(presentationLabel);
-        BPresentation.add(presentation);
+        Box BAnnee= Box.createHorizontalBox();
+        BAnnee.setPreferredSize(new Dimension(100,25));
+        BAnnee.add(anneeLabel);
+        BAnnee.add(annee);
 
         Box BRangee= Box.createHorizontalBox();
         BRangee.setPreferredSize(new Dimension(100,25));
         BRangee.add(rangeeLabel);
         BRangee.add(rangee);
-
-        Box BColonne=Box.createHorizontalBox();
-        BColonne.setPreferredSize(new Dimension(100,25));
-        BColonne.add(colonneLabel);
-        BColonne.add(colonne);
-
-        applyBouton = new JButton("Ajouter/Modifier"); 
 
         Box haut =Box.createVerticalBox();
 
@@ -146,13 +146,8 @@ public class WindowManager extends JFrame {
 
         haut.add(BLivre);
         haut.add(BAuteur);
-        haut.add(BParution);
-        haut.add(BPresentation);
+        haut.add(BAnnee);
         haut.add(BRangee);
-        haut.add(BColonne);
-        haut.add(applyBouton);
-        
-        DisableFormComponent();
 
         panForm.add(haut);
 
@@ -160,8 +155,6 @@ public class WindowManager extends JFrame {
         control.setBackground(Color.white);
         ajouterBouton=new JButton("<html><font color='green'>+</font></html>");
         supprimerBouton=new JButton("<html><font color='red'>-</font></html>");
-
-        ajouterBouton.addActionListener(new AddRemoveListener());
         control.add(ajouterBouton);
         control.add(supprimerBouton);
 
@@ -169,7 +162,7 @@ public class WindowManager extends JFrame {
         /*
         panForm.add(livreLabel);
         panForm.add(livre);
-        panForm.add(parutionLabel);
+        panForm.add(anneeLabel);
         panForm.add(annee);
         panForm.add(auteurLabel);
         panForm.add(auteur);
@@ -193,25 +186,6 @@ public class WindowManager extends JFrame {
         pack();
     }
 
-    public void DisableFormComponent() {
-        livre.setEnabled(false);
-        presentation.setEnabled(false);
-        auteur.setEnabled(false);
-        parution.setEnabled(false);
-        rangee.setEnabled(false);
-        colonne.setEnabled(false);
-        applyBouton.setEnabled(false);
-    }
-    public void EnableFormComponent() {
-        livre.setEnabled(true);
-        presentation.setEnabled(true);
-        auteur.setEnabled(true);
-        parution.setEnabled(true);
-        rangee.setEnabled(true);
-        colonne.setEnabled(true);
-        applyBouton.setEnabled(true);
-    }
-
     class FileListener implements ActionListener{
         //Redéfinition de la méthode actionPerformed()
         public void actionPerformed(ActionEvent e) {
@@ -221,40 +195,36 @@ public class WindowManager extends JFrame {
                 
             }
             if (e.getSource()==open) {
-                JFileChooser chooser = new JFileChooser();//création dun nouveau filechoser
-                FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter("xml files (*.xml)", "xml");
+                JFileChooser chooser = new JFileChooser();//création dun nouveau filechosser
                 chooser.setApproveButtonText("Choix du fichier..."); //intitulé du bouton
-                chooser.setFileFilter(xmlfilter);
-                chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                //chooser.showOpenDialog(null); //affiche la boite de dialogue
+                chooser.showOpenDialog(null); //affiche la boite de dialogue
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {	
-                    String path = chooser.getSelectedFile().getAbsolutePath();
-                    System.out.println(path);
                     try {
+                        String path = chooser.getSelectedFile().getAbsolutePath();
+                        System.out.println(path);
                         bibliotheque.chargerLivre(path);
+                        System.out.println(bibliotheque.getLivre().get(0));
+                        table.fireTableDataChanged();
+                        tableau.repaint();
                     }
                     catch (JAXBException je) {
-                        JOptionPane.showMessageDialog(null, "Can't open this file : " + je, "Erreur - Ouverture", JOptionPane.ERROR_MESSAGE);
+                        System.out.println("erreur jaxb");
                     }
-                }      
-            }
-       }
-    }
-
-<<<<<<< HEAD
-    class AddRemoveListener implements ActionListener {
-
-        public void actionPerformed(ActionEvent e) {
-
-            if (e.getSource()==ajouterBouton) {
-                EnableFormComponent();
+                    catch (Exception t) {
+                        System.out.println("erreur");
+                    }
+                }
             }
         }
     }
-=======
->>>>>>> b5c7cf7a4f86e847477a1f0c605d77cf7f5ff275
 
+    class AddRemoveListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+        }
+    }
 }
 
+  
 
 
