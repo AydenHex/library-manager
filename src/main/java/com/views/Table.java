@@ -17,7 +17,7 @@ public class Table extends AbstractTableModel {
     }
 
     public int getRowCount() {
-        return this.bibliotheque.getLivres().size();
+        return this.bibliotheque.getLivre().size();
     }
 
     public int getColumnCount() {
@@ -31,15 +31,15 @@ public class Table extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch(columnIndex){
             case 0:
-                return this.bibliotheque.getLivres().get(rowIndex).getTitre();
+                return this.bibliotheque.getLivre().get(rowIndex).getTitre();
             case 1:
-                return this.bibliotheque.getLivres().get(rowIndex).getAuteur();
+                return this.bibliotheque.getLivre().get(rowIndex).getAuteur();
             case 2:
-                return this.bibliotheque.getLivres().get(rowIndex).getParution();
+                return this.bibliotheque.getLivre().get(rowIndex).getParution();
             case 3:
-                return this.bibliotheque.getLivres().get(rowIndex).getRangee();
+                return this.bibliotheque.getLivre().get(rowIndex).getRangee();
             case 4:
-                return this.bibliotheque.getLivres().get(rowIndex).getColonne();
+                return this.bibliotheque.getLivre().get(rowIndex).getColonne();
             default:
                 return null; //Ne devrait jamais arriver
         }

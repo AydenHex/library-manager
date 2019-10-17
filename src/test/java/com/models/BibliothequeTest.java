@@ -1,38 +1,25 @@
 package com.models;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
 
+import com.models.Bibliotheque.Livre;
+
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.BeforeClass;
 
 public class BibliothequeTest {
-    private Bibliotheque bibliotheque = new Bibliotheque();
+    private static Bibliotheque bibliotheque;
+    private static ObjectFactory of;
+    @BeforeClass
+    public static void setup() {
+        BibliothequeTest.of = new ObjectFactory();
+        BibliothequeTest.bibliotheque = BibliothequeTest.of.createBibliotheque();
 
+    }
     @Before
     public final void prepareTest() {
-        this.bibliotheque.setLivres(new ArrayList<Livre>());
+        BibliothequeTest.bibliotheque.livre = new ArrayList<Livre>();
     }
 
-    @Test
-    public final void addLivre() {
-        Auteur auteur = new Auteur("John", "Doe");
-        Livre livre = new Livre("LivreTest", auteur, "PresentationTest", 2000, 2, 2);
-        
-        this.bibliotheque.getLivres().add(livre);
-
-        assertTrue(this.bibliotheque.getLivres().size() == 1);
-    }
-
-    @Test
-    public final void removeLivre() {
-        Auteur auteur = new Auteur("John", "Doe");
-        Livre livre = new Livre("LivreTest", auteur, "PresentationTest", 2000, 2, 2);
-        
-        this.bibliotheque.getLivres().add(livre);
-        this.bibliotheque.getLivres().remove(livre);
-
-        assertTrue(this.bibliotheque.getLivres().size() == 0);
-    }
+    
 }

@@ -16,13 +16,20 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.xml.bind.JAXBException;
+
+import com.models.Bibliotheque;
 
 public class WindowManager extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    private Bibliotheque bibliotheque = new Bibliotheque();
+
     private JMenuBar menuBar = new JMenuBar();
     private JMenu file=new JMenu("Fichier");
     private JMenu Edition =new JMenu("Edition");
@@ -182,17 +189,26 @@ public class WindowManager extends JFrame {
                 
             }
             if (e.getSource()==open) {
-                JFileChooser chooser = new JFileChooser();//création dun nouveau filechosser
+                JFileChooser chooser = new JFileChooser();//création dun nouveau filechoser
+                FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter("xml files (*.xml)", "xml");
                 chooser.setApproveButtonText("Choix du fichier..."); //intitulé du bouton
-                chooser.showOpenDialog(null); //affiche la boite de dialogue
+                chooser.setFileFilter(xmlfilter);
+                chooser.setFileSelectionMode(0);;
+                //chooser.showOpenDialog(null); //affiche la boite de dialogue
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {	
-                    System.out.println(chooser.getSelectedFile().getAbsolutePath()); 
-                }
+                    String path = chooser.getSelectedFile().getAbsolutePath();
+                    System.out.println(path);
+                    try {
+                        bibliotheque.chargerLivre(path);
+                    }
+                    catch (JAXBException je) {
+                        JOptionPane.showMessageDialog(null, "Can't open this file : " + je, "Erreur - Ouverture", JOptionPane.ERROR_MESSAGE);
+                    }
+                }      
             }
-        }
+       }
     }
 }
-
 
 
 
