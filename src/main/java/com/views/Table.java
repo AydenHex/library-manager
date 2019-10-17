@@ -1,0 +1,47 @@
+package com.views;
+
+import javax.swing.table.AbstractTableModel;
+
+import com.models.Bibliotheque;
+
+public class Table extends AbstractTableModel {
+    private final Bibliotheque bibliotheque;
+     private static final long serialVersionUID = 1L;
+
+    private final String[] entetes = {"Titre", "Auteur","Année","Rangée","Colonne"};
+
+    public Table() {
+        super();
+
+        this.bibliotheque = new Bibliotheque();
+    }
+
+    public int getRowCount() {
+        return this.bibliotheque.getLivres().size();
+    }
+
+    public int getColumnCount() {
+        return entetes.length;
+    }
+
+    public String getColumnName(int columnIndex) {
+        return entetes[columnIndex];
+    }
+
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        switch(columnIndex){
+            case 0:
+                return this.bibliotheque.getLivres().get(rowIndex).getTitre();
+            case 1:
+                return this.bibliotheque.getLivres().get(rowIndex).getAuteur();
+            case 2:
+                return this.bibliotheque.getLivres().get(rowIndex).getParution();
+            case 3:
+                return this.bibliotheque.getLivres().get(rowIndex).getRangee();
+            case 4:
+                return this.bibliotheque.getLivres().get(rowIndex).getColonne();
+            default:
+                return null; //Ne devrait jamais arriver
+        }
+    }
+}
