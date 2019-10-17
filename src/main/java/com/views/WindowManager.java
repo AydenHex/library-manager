@@ -35,6 +35,8 @@ public class WindowManager extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private Bibliotheque bibliotheque = new Bibliotheque();
+    private boolean modification;
+    private String path;
 
     private JMenuBar menuBar = new JMenuBar();
     private JMenu file = new JMenu("Fichier");
@@ -63,6 +65,7 @@ public class WindowManager extends JFrame {
         this.setTitle("Gestion Livre");
         this.setSize(700, 500);
         this.setLocationRelativeTo(null);
+        this.modification = false;
         this.initComponent();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -271,6 +274,31 @@ public class WindowManager extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
             if (e.getSource()==close) {
+                String[] options = {"Sauvegarder", "Ne pas sauvegarder", "annuler"};
+
+                if (modification) {
+                    int value = JOptionPane.showOptionDialog(null, "Souhaitez-vous vraiment quitter sans sauvegarder",
+                     "Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                      null, options, options[0]);
+
+                    switch (value) {
+                        case 0:
+                            try {
+                                bibliotheque.sauvegarderLivre(path);
+                                break;
+                            }
+                            catch (Exception ex) {
+                                System.out.println(ex);
+                            }
+                        case 1:
+                            System.exit(0);
+                            break;
+                        case 2:
+                            break;
+                
+                            
+                    }
+                }
                 System.exit(0);
                 
             }
@@ -281,15 +309,16 @@ public class WindowManager extends JFrame {
                 chooser.setFileFilter(xmlfilter);
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {	
                     try {
-                        String path = chooser.getSelectedFile().getAbsolutePath();
-                        System.out.println(path);
-                        bibliotheque.chargerLivre(path);
+                        String thepath = chooser.getSelectedFile().getAbsolutePath();
+                        System.out.println(thepath);
+                        bibliotheque.chargerLivre(thepath);
+                        path = thepath;
                         System.out.println(bibliotheque.getLivre().get(0));
                         table.fireTableDataChanged();
                         tableau.repaint();
                     }
                     catch (JAXBException je) {
-                        System.out.println("erreur jaxb");
+                        System.out.println("erreur jaxb : " + je);
                     }
                     catch (Exception t) {
                         System.out.println("erreur");
@@ -330,6 +359,7 @@ public class WindowManager extends JFrame {
                 livre.setRangee(Short.parseShort(srangee.getText()));
                 livre.setAuteur(auteur);
                 bibliotheque.getLivre().add(livre);
+                modification = true;
                 table.fireTableDataChanged();
                 tableau.repaint();
             }

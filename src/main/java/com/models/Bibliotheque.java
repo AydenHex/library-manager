@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -111,12 +112,25 @@ public class Bibliotheque {
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         
         //We had written this file in marshalling example
-        Bibliotheque emps = (Bibliotheque) jaxbUnmarshaller.unmarshal( new File(path) );
+        Bibliotheque emps = (Bibliotheque) jaxbUnmarshaller.unmarshal(new File(path));
         
         for(Livre emp : emps.getLivre())
         {
             this.getLivre().add(emp);
         }
+    }
+
+    public void sauvegarderLivre(String path) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(Bibliotheque.class);
+        Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+    
+        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        
+        //Marshal the employees list in console
+        jaxbMarshaller.marshal(this, System.out);
+        
+        //Marshal the employees list in file
+        jaxbMarshaller.marshal(this, new File(path));
     }
 
     /**
