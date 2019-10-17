@@ -48,8 +48,8 @@ public class WindowManager extends JFrame {
     private JMenuItem Info = new JMenuItem("informations");
 
     private JButton ajouterBouton, supprimerBouton, apply;
-    private JLabel livreLabel, auteurLabel, parutionLabel, rangeeLabel, colonneLabel, presentationLabel;
-    private JTextField slivre, sauteur, sparution, srangee, scolonne;
+    private JLabel livreLabel, nomAuteurLabel, prenomAuteurLabel, parutionLabel, rangeeLabel, colonneLabel, presentationLabel;
+    private JTextField slivre, sauteurnom, sauteurprenom, sparution, srangee, scolonne;
     private JTextArea spresentation;
     private Box haut;
 
@@ -104,14 +104,16 @@ public class WindowManager extends JFrame {
 
         livreLabel = new JLabel("Livre : ");
         parutionLabel = new JLabel("Parution : ");
-        auteurLabel = new JLabel("Auteur: ");
+        nomAuteurLabel = new JLabel("Nom auteur: ");
+        prenomAuteurLabel = new JLabel("Prenom auteur");
         rangeeLabel = new JLabel("Rangée : ");
         presentationLabel = new JLabel("Présentation : ");
         colonneLabel = new JLabel("Colonne : ");
 
         slivre = new JTextField();
         sparution = new JTextField();
-        sauteur = new JTextField();
+        sauteurnom = new JTextField();
+        sauteurprenom = new JTextField();
         srangee = new JTextField();
 
         Border border = BorderFactory.createLineBorder(Color.BLACK);
@@ -129,10 +131,15 @@ public class WindowManager extends JFrame {
         BLivre.add(slivre);
 
 
-        Box BAuteur=Box.createHorizontalBox();
-        BAuteur.setPreferredSize(new Dimension(100,25));
-        BAuteur.add(auteurLabel);
-        BAuteur.add(sauteur);
+        Box BAuteurNom=Box.createHorizontalBox();
+        BAuteurNom.setPreferredSize(new Dimension(100,25));
+        BAuteurNom.add(nomAuteurLabel);
+        BAuteurNom.add(sauteurnom);
+
+        Box BAuteurPrenom = Box.createHorizontalBox();
+        BAuteurPrenom.setPreferredSize(new Dimension(100,25));
+        BAuteurPrenom.add(prenomAuteurLabel);
+        BAuteurPrenom.add(sauteurprenom);
 
 
         Box BAnnee= Box.createHorizontalBox();
@@ -163,7 +170,8 @@ public class WindowManager extends JFrame {
         haut.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         haut.add(BLivre);
-        haut.add(BAuteur);
+        haut.add(BAuteurNom);
+        haut.add(BAuteurPrenom);
         haut.add(BAnnee);
         haut.add(BPresentation);
         haut.add(BColonne);
@@ -217,7 +225,8 @@ public class WindowManager extends JFrame {
 
     public void enableFormComponent() {
         slivre.setEnabled(true);
-        sauteur.setEnabled(true);
+        sauteurnom.setEnabled(true);
+        sauteurprenom.setEnabled(true);
         sparution.setEnabled(true);
         spresentation.setEnabled(true);
         scolonne.setEnabled(true);
@@ -227,7 +236,8 @@ public class WindowManager extends JFrame {
 
     public void disableFormComponent() {
         slivre.setEnabled(false);
-        sauteur.setEnabled(false);
+        sauteurnom.setEnabled(true);
+        sauteurprenom.setEnabled(true);
         sparution.setEnabled(false);
         spresentation.setEnabled(false);
         scolonne.setEnabled(false);
@@ -237,15 +247,14 @@ public class WindowManager extends JFrame {
 
     public void verifyForm() throws ExceptionForm {
         String titre = slivre.getText();
-        String sAuteur = sauteur.getText();
+        String sAuteurNom = sauteurnom.getText();
+        String sAuteurPrenom = sauteurprenom.getText();
         String sParution = sparution.getText();
         String sPresentation = spresentation.getText();
         String sColonne = scolonne.getText();
         String sRangee = scolonne.getText();
 
-        String[] auteurSplit = sAuteur.split(" ");
-
-        if (titre == "" && sAuteur == "" && sParution == "" && sPresentation == "" && sColonne == "" && sRangee == "") {
+        if (titre == "" && sAuteurNom == "" && sAuteurPrenom == "" && sParution == "" && sPresentation == "" && sColonne == "" && sRangee == "") {
             throw new ExceptionForm("Veuillez remplir tout les champs avant de valider");
         }
         if (Integer.parseInt(sColonne) < 1 && Integer.parseInt(sColonne) > 5) {
@@ -253,10 +262,6 @@ public class WindowManager extends JFrame {
         }
         if (Integer.parseInt(sRangee) < 1 && Integer.parseInt(sRangee) > 6) {
             throw new ExceptionForm("Veuillez choisir une colonne entre 1 et 5");
-        }
-
-        if (auteurSplit.length != 2) {
-            throw new ExceptionForm("Veuillez choisir un nom d'auteur avec un espace entre nom et prénom");
         }
 
     }
@@ -313,17 +318,17 @@ public class WindowManager extends JFrame {
                 JOptionPane.showMessageDialog(null, x);
             }
             if (applyType == "add") {
-                String[] tAuteur = sauteur.getText().split(" ");
                 Auteur auteur = new Auteur();
-                auteur.setPrenom(tAuteur[0]);
-                auteur.setNom(tAuteur[1]);
+                auteur.setPrenom(sauteurprenom.getText());
+                auteur.setNom(sauteurnom.getText());
 
                 Livre livre = new Livre();
-                livre.setTitre(sauteur.getText());
+                livre.setTitre(slivre.getText());
                 livre.setPresentation(spresentation.getText());
                 livre.setParution(Integer.parseInt(sparution.getText()));
                 livre.setColonne(Short.parseShort(scolonne.getText()));
                 livre.setRangee(Short.parseShort(srangee.getText()));
+                livre.setAuteur(auteur);
                 bibliotheque.getLivre().add(livre);
                 table.fireTableDataChanged();
                 tableau.repaint();
