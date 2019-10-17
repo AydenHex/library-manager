@@ -5,7 +5,6 @@
 // Généré le : 2019.10.17 à 10:47:45 AM CEST 
 //
 
-
 package com.models;
 
 import java.io.File;

@@ -16,8 +16,7 @@ import com.models.Bibliotheque;
 public class WindowManager extends JFrame {
 
     private static final long serialVersionUID = 1L;
-    private Bibliotheque bibliotheque = new Bibliotheque();
-
+    private Bibliotheque bibliotheque;
     private JMenuBar menuBar = new JMenuBar();
     private JMenu file=new JMenu("Fichier");
     private JMenu Edition =new JMenu("Edition");
@@ -30,8 +29,9 @@ public class WindowManager extends JFrame {
     private JMenuItem Info = new JMenuItem("informations");
 
     private JButton ajouterBouton, supprimerBouton;
-    private JLabel livreLabel,auteurLabel, anneeLabel,rangeeLabel;
-    private JTextField livre,auteur, annee,rangee;
+    private JLabel livreLabel,auteurLabel, presentationLabel,rangeeLabel, colonneLabel, parutionLabel;
+    private JTextField livre,auteur,rangee, colonne, parution;
+    private JTextArea presentation;
 
 
 
@@ -39,6 +39,7 @@ public class WindowManager extends JFrame {
 
     public WindowManager(){
         //caracteristiques de la fenetre
+        this.bibliotheque = new Bibliotheque();
         this.setTitle("Gestion Livre");
         this.setSize(700,500);
         this.setLocationRelativeTo(null);
@@ -88,14 +89,19 @@ public class WindowManager extends JFrame {
         panForm.setBorder((BorderFactory.createTitledBorder("Formulaire d'interaction")));
 
         livreLabel=new JLabel("Livre : ");
-        anneeLabel=new JLabel("Année : ");
+        presentationLabel=new JLabel("Résumé : ");
         auteurLabel=new JLabel("Auteur: ");
         rangeeLabel=new JLabel("rangée : ");
-        livre=new JTextField();
+        colonneLabel = new JLabel("colonne : ");
+        parutionLabel = new JLabel("parution : ");
 
-        annee=new JTextField();
+        livre=new JTextField();
+        presentation = new JTextArea(5, 2);
+        presentation.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         auteur=new JTextField();
         rangee=new JTextField();
+        colonne = new JTextField();
+        parution = new JTextField();
 
 
 
@@ -111,16 +117,25 @@ public class WindowManager extends JFrame {
         BAuteur.add(auteurLabel);
         BAuteur.add(auteur);
 
+        Box BParution=Box.createHorizontalBox();
+        BParution.setPreferredSize(new Dimension(100,25));
+        BParution.add(parutionLabel);
+        BParution.add(parution);
 
-        Box BAnnee= Box.createHorizontalBox();
-        BAnnee.setPreferredSize(new Dimension(100,25));
-        BAnnee.add(anneeLabel);
-        BAnnee.add(annee);
+        Box BPresentation = Box.createHorizontalBox();
+        BPresentation.setPreferredSize(new Dimension(100,100));
+        BPresentation.add(presentationLabel);
+        BPresentation.add(presentation);
 
         Box BRangee= Box.createHorizontalBox();
         BRangee.setPreferredSize(new Dimension(100,25));
         BRangee.add(rangeeLabel);
         BRangee.add(rangee);
+
+        Box BColonne=Box.createHorizontalBox();
+        BColonne.setPreferredSize(new Dimension(100,25));
+        BColonne.add(colonneLabel);
+        BColonne.add(colonne);
 
         Box haut =Box.createVerticalBox();
 
@@ -128,8 +143,10 @@ public class WindowManager extends JFrame {
 
         haut.add(BLivre);
         haut.add(BAuteur);
-        haut.add(BAnnee);
+        haut.add(BParution);
+        haut.add(BPresentation);
         haut.add(BRangee);
+        haut.add(BColonne);
 
         panForm.add(haut);
 
@@ -144,7 +161,7 @@ public class WindowManager extends JFrame {
         /*
         panForm.add(livreLabel);
         panForm.add(livre);
-        panForm.add(anneeLabel);
+        panForm.add(parutionLabel);
         panForm.add(annee);
         panForm.add(auteurLabel);
         panForm.add(auteur);
