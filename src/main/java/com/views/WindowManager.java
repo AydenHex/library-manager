@@ -42,8 +42,8 @@ public class WindowManager extends JFrame {
     private JMenuItem Info = new JMenuItem("informations");
 
     private JButton ajouterBouton, supprimerBouton;
-    private JLabel livreLabel,auteurLabel, presentationLabel,rangeeLabel;
-    private JTextField livre,auteur,rangee;
+    private JLabel livreLabel,auteurLabel, presentationLabel,rangeeLabel, colonneLabel, parutionLabel;
+    private JTextField livre,auteur,rangee, colonne, parution;
     private JTextArea presentation;
 
 
@@ -105,11 +105,16 @@ public class WindowManager extends JFrame {
         presentationLabel=new JLabel("Résumé : ");
         auteurLabel=new JLabel("Auteur: ");
         rangeeLabel=new JLabel("rangée : ");
+        colonneLabel = new JLabel("colonne : ");
+        parutionLabel = new JLabel("parution : ");
 
         livre=new JTextField();
         presentation = new JTextArea(5, 2);
+        presentation.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         auteur=new JTextField();
         rangee=new JTextField();
+        colonne = new JTextField();
+        parution = new JTextField();
 
 
 
@@ -125,16 +130,25 @@ public class WindowManager extends JFrame {
         BAuteur.add(auteurLabel);
         BAuteur.add(auteur);
 
+        Box BParution=Box.createHorizontalBox();
+        BParution.setPreferredSize(new Dimension(100,25));
+        BParution.add(parutionLabel);
+        BParution.add(parution);
+        
         Box BPresentation = Box.createHorizontalBox();
-        BPresentation.setPreferredSize(new Dimension(100,50));
+        BPresentation.setPreferredSize(new Dimension(100,100));
         BPresentation.add(presentationLabel);
         BPresentation.add(presentation);
-
 
         Box BRangee= Box.createHorizontalBox();
         BRangee.setPreferredSize(new Dimension(100,25));
         BRangee.add(rangeeLabel);
         BRangee.add(rangee);
+
+        Box BColonne=Box.createHorizontalBox();
+        BColonne.setPreferredSize(new Dimension(100,25));
+        BColonne.add(colonneLabel);
+        BColonne.add(colonne);
 
         Box haut =Box.createVerticalBox();
 
@@ -142,8 +156,10 @@ public class WindowManager extends JFrame {
 
         haut.add(BLivre);
         haut.add(BAuteur);
+        haut.add(BParution);
         haut.add(BPresentation);
         haut.add(BRangee);
+        haut.add(BColonne);
 
         panForm.add(haut);
 
