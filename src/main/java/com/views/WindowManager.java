@@ -7,20 +7,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.bind.JAXBException;
 
@@ -62,7 +49,7 @@ public class WindowManager extends JFrame {
 
 
 
-    public void initComponent(){
+    private void initComponent(){
         //implementation du menu a completer
         file.add(open);
         file.add(close);
@@ -83,9 +70,12 @@ public class WindowManager extends JFrame {
 
         //affichage tableau
         JPanel panTable=new JPanel();
+
         panTable.setBorder((BorderFactory.createTitledBorder("Tableau des livres")));
+
         JTable tableau = new JTable(new Table(this.bibliotheque));
         panTable.add(tableau, BorderLayout.CENTER);
+
 
 
 
@@ -132,7 +122,7 @@ public class WindowManager extends JFrame {
         BParution.setPreferredSize(new Dimension(100,25));
         BParution.add(parutionLabel);
         BParution.add(parution);
-        
+
         Box BPresentation = Box.createHorizontalBox();
         BPresentation.setPreferredSize(new Dimension(100,100));
         BPresentation.add(presentationLabel);
@@ -235,7 +225,7 @@ public class WindowManager extends JFrame {
                 FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter("xml files (*.xml)", "xml");
                 chooser.setApproveButtonText("Choix du fichier..."); //intitulé du bouton
                 chooser.setFileFilter(xmlfilter);
-                chooser.setFileSelectionMode(0);;
+                chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 //chooser.showOpenDialog(null); //affiche la boite de dialogue
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {	
                     String path = chooser.getSelectedFile().getAbsolutePath();
@@ -251,6 +241,7 @@ public class WindowManager extends JFrame {
        }
     }
 
+<<<<<<< HEAD
     class AddRemoveListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
@@ -260,6 +251,8 @@ public class WindowManager extends JFrame {
             }
         }
     }
+=======
+>>>>>>> b5c7cf7a4f86e847477a1f0c605d77cf7f5ff275
 
 }
 
