@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.bind.JAXBException;
 
 import com.models.Bibliotheque;
@@ -197,7 +198,8 @@ public class WindowManager extends JFrame {
             if (e.getSource()==open) {
                 JFileChooser chooser = new JFileChooser();//création dun nouveau filechosser
                 chooser.setApproveButtonText("Choix du fichier..."); //intitulé du bouton
-                chooser.showOpenDialog(null); //affiche la boite de dialogue
+                FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter("xml files (*.xml)", "xml");
+                chooser.setFileFilter(xmlfilter);
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {	
                     try {
                         String path = chooser.getSelectedFile().getAbsolutePath();
