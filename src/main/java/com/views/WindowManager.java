@@ -41,7 +41,7 @@ public class WindowManager extends JFrame {
     private JMenuItem SauvegarderSous = new JMenuItem("Sauvegarder Sous");
     private JMenuItem Info = new JMenuItem("informations");
 
-    private JButton ajouterBouton, supprimerBouton;
+    private JButton ajouterBouton, supprimerBouton, applyBouton;
     private JLabel livreLabel,auteurLabel, presentationLabel,rangeeLabel, colonneLabel, parutionLabel;
     private JTextField livre,auteur,rangee, colonne, parution;
     private JTextArea presentation;
@@ -116,8 +116,6 @@ public class WindowManager extends JFrame {
         colonne = new JTextField();
         parution = new JTextField();
 
-
-
         Box BLivre=Box.createHorizontalBox();
         BLivre.setPreferredSize(new Dimension(200,25));
         BLivre.add(livreLabel/*,RIGHT_ALIGNMENT*/);
@@ -150,6 +148,8 @@ public class WindowManager extends JFrame {
         BColonne.add(colonneLabel);
         BColonne.add(colonne);
 
+        applyBouton = new JButton("Ajouter/Modifier"); 
+
         Box haut =Box.createVerticalBox();
 
         haut.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -160,6 +160,9 @@ public class WindowManager extends JFrame {
         haut.add(BPresentation);
         haut.add(BRangee);
         haut.add(BColonne);
+        haut.add(applyBouton);
+        
+        DisableFormComponent();
 
         panForm.add(haut);
 
@@ -167,6 +170,8 @@ public class WindowManager extends JFrame {
         control.setBackground(Color.white);
         ajouterBouton=new JButton("<html><font color='green'>+</font></html>");
         supprimerBouton=new JButton("<html><font color='red'>-</font></html>");
+
+        ajouterBouton.addActionListener(new AddRemoveListener());
         control.add(ajouterBouton);
         control.add(supprimerBouton);
 
@@ -198,6 +203,25 @@ public class WindowManager extends JFrame {
         pack();
     }
 
+    public void DisableFormComponent() {
+        livre.setEnabled(false);
+        presentation.setEnabled(false);
+        auteur.setEnabled(false);
+        parution.setEnabled(false);
+        rangee.setEnabled(false);
+        colonne.setEnabled(false);
+        applyBouton.setEnabled(false);
+    }
+    public void EnableFormComponent() {
+        livre.setEnabled(true);
+        presentation.setEnabled(true);
+        auteur.setEnabled(true);
+        parution.setEnabled(true);
+        rangee.setEnabled(true);
+        colonne.setEnabled(true);
+        applyBouton.setEnabled(true);
+    }
+
     class FileListener implements ActionListener{
         //Redéfinition de la méthode actionPerformed()
         public void actionPerformed(ActionEvent e) {
@@ -226,6 +250,17 @@ public class WindowManager extends JFrame {
             }
        }
     }
+
+    class AddRemoveListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+
+            if (e.getSource()==ajouterBouton) {
+                EnableFormComponent();
+            }
+        }
+    }
+
 }
 
 
