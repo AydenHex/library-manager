@@ -7,19 +7,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.bind.JAXBException;
 
@@ -60,7 +48,7 @@ public class WindowManager extends JFrame {
 
 
 
-    public void initComponent(){
+    private void initComponent(){
         //implementation du menu a completer
         file.add(open);
         file.add(close);
@@ -82,7 +70,7 @@ public class WindowManager extends JFrame {
         //affichage tableau
         JPanel panTable=new JPanel();
         panTable.setBorder((BorderFactory.createTitledBorder("Tableau des livres")));
-        JTable tableau = new JTable(new Table());
+        JTable tableau = new JTable(new Table(this.bibliotheque));
         panTable.add(tableau, BorderLayout.CENTER);
 
 
@@ -193,7 +181,7 @@ public class WindowManager extends JFrame {
                 FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter("xml files (*.xml)", "xml");
                 chooser.setApproveButtonText("Choix du fichier..."); //intitulé du bouton
                 chooser.setFileFilter(xmlfilter);
-                chooser.setFileSelectionMode(0);;
+                chooser.setFileSelectionMode(0);
                 //chooser.showOpenDialog(null); //affiche la boite de dialogue
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {	
                     String path = chooser.getSelectedFile().getAbsolutePath();
@@ -208,6 +196,8 @@ public class WindowManager extends JFrame {
             }
        }
     }
+
+
 }
 
 
