@@ -379,6 +379,11 @@ public class Bibliotheque {
                 this.prenom = value;
             }
 
+            @Override
+            public String toString() {
+                return this.getPrenom() + " " + this.getNom();
+            }
+
         }
 
     }
