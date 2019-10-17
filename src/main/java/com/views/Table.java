@@ -17,7 +17,7 @@ public class Table extends AbstractTableModel {
     }
 
     public int getRowCount() {
-        return this.bibliotheque.getLivre().size();
+		return this.bibliotheque.getLivre().size();
 	}
 
 	public int getColumnCount() {
@@ -28,6 +28,7 @@ public class Table extends AbstractTableModel {
 	public String getColumnName(int columnIndex) {
 		return entetes[columnIndex];
 	}
+
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch (columnIndex) {
