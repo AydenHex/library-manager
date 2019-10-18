@@ -66,6 +66,7 @@ public class WindowManager extends JFrame {
         this.setSize(700, 500);
         this.setLocationRelativeTo(null);
         this.modification = false;
+        this.path = "";
         this.initComponent();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -79,6 +80,8 @@ public class WindowManager extends JFrame {
 
         Edition.add(Sauvegarder);
         Edition.add(SauvegarderSous);
+        Sauvegarder.addActionListener(new EditionListener());
+        SauvegarderSous.addActionListener(new EditionListener());
 
         About.add(Info);
 
@@ -364,6 +367,45 @@ public class WindowManager extends JFrame {
                 tableau.repaint();
             }
 
+        }
+    }
+    class EditionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            /**if (path == "") {
+                    JOptionPane.showMessageDialog(null, "Veuillez ouvrir un fichier avant de sauvegarder");
+                    return;
+            }*/
+            if (e.getSource() == Sauvegarder) {
+                try {
+                    bibliotheque.sauvegarderLivre(path);
+                    modification = false;
+                    JOptionPane.showMessageDialog(null, "Votre fichier à bien été sauvegarder");
+                }
+                catch (JAXBException je) {
+                    System.out.println("Erreur JAXB : " + e);
+                }
+            }
+            if (e.getSource() == SauvegarderSous) {
+                JFileChooser chooser = new JFileChooser();//création dun nouveau filechosser
+                chooser.setApproveButtonText("Choix du fichier..."); //intitulé du bouton
+                FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter("xml files (*.xml)", "xml");
+                chooser.setFileFilter(xmlfilter);
+                if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {	
+                    try {
+                        String thepath = chooser.getSelectedFile().getAbsolutePath();
+                        System.out.println(thepath);
+                        bibliotheque.sauvegarderLivre(thepath);
+                        path = thepath;
+                        modification = false;
+                    }
+                    catch (JAXBException je) {
+                        System.out.println("erreur jaxb : " + je);
+                    }
+                    catch (Exception t) {
+                        System.out.println("erreur : " + t);
+                    }
+                }
+            }
         }
     }
 
