@@ -1,6 +1,5 @@
 package com.libmanager;
 
-import com.models.Bibliotheque;
 import com.views.WindowManager;
 
 /**
