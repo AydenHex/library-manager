@@ -110,6 +110,8 @@ public class Bibliotheque {
     public void chargerLivre(String path) throws JAXBException{
         JAXBContext jaxbContext = JAXBContext.newInstance(Bibliotheque.class);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+        //reset bibliotheque
+        this.getLivre().clear();
         
         //We had written this file in marshalling example
         Bibliotheque emps = (Bibliotheque) jaxbUnmarshaller.unmarshal(new File(path));
@@ -126,12 +128,10 @@ public class Bibliotheque {
     
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         
-        //Marshal the employees list in console
-        jaxbMarshaller.marshal(this, System.out);
-        
         //Marshal the employees list in file
         jaxbMarshaller.marshal(this, new File(path));
     }
+
 
     /**
      * <p>Classe Java pour anonymous complex type.

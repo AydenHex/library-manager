@@ -52,12 +52,32 @@ public class ObjectFactory {
         return new Bibliotheque.Livre();
     }
 
+    public Bibliotheque.Livre createLivre(String titre, Bibliotheque.Livre.Auteur auteur, Integer parution, String presentation, Short colonne, Short rangee) {
+        Bibliotheque.Livre livre = new Bibliotheque.Livre();
+        livre.setTitre(titre);
+        livre.setAuteur(auteur);
+        livre.setParution(parution);
+        livre.setPresentation(presentation);
+        livre.setColonne(colonne);
+        livre.setRangee(rangee);
+
+        return livre;
+    }
+
     /**
      * Create an instance of {@link Bibliotheque.Livre.Auteur }
      * 
      */
     public Bibliotheque.Livre.Auteur createBibliothequeLivreAuteur() {
         return new Bibliotheque.Livre.Auteur();
+    }
+
+    public Bibliotheque.Livre.Auteur createAuteur(String nom, String prenom) {
+        Bibliotheque.Livre.Auteur auteur = new Bibliotheque.Livre.Auteur();
+        auteur.setNom(nom);
+        auteur.setPrenom(prenom);
+
+        return auteur;
     }
 
 }

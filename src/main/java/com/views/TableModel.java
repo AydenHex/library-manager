@@ -8,7 +8,7 @@ public class TableModel extends AbstractTableModel {
     private final Bibliotheque bibliotheque;
      private static final long serialVersionUID = 1L;
 
-    private final String[] entetes = {"Titre", "Auteur","Année","Rangée","Colonne"};
+    private final String[] entetes = {"Titre", "Auteur","Année","Présentation","Rangée","Colonne"};
 
     public TableModel(Bibliotheque bibliotheque) {
         super();
@@ -39,8 +39,10 @@ public class TableModel extends AbstractTableModel {
 		case 2:
 			return this.bibliotheque.getLivre().get(rowIndex).getParution();
 		case 3:
-			return this.bibliotheque.getLivre().get(rowIndex).getRangee();
+			return this.bibliotheque.getLivre().get(rowIndex).getPresentation();
 		case 4:
+			return this.bibliotheque.getLivre().get(rowIndex).getRangee();
+		case 5:
 			return this.bibliotheque.getLivre().get(rowIndex).getColonne();
             default:
                 return null; //Ne devrait jamais arriver

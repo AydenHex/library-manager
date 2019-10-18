@@ -22,6 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -38,7 +39,9 @@ public class WindowManager extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private Bibliotheque bibliotheque = new Bibliotheque();
+    private int livreSelectionne;
     private boolean modification;
+    private boolean suppression;
     private String path;
 
     private JMenuBar menuBar = new JMenuBar();
@@ -71,6 +74,7 @@ public class WindowManager extends JFrame {
         this.setLocationRelativeTo(null);
         this.modification = false;
         this.path = "";
+        this.livreSelectionne = -1;
         this.initComponent();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -107,13 +111,8 @@ public class WindowManager extends JFrame {
                 return c;
             }
         };
-        tableau.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-        
-            @Override
-             public void valueChanged(ListSelectionEvent event) {
-            System.out.println(tableau.getValueAt(tableau.getSelectedRow(), 0));
-        }
-        });
+        tableau.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tableau.getSelectionModel().addListSelectionListener(new TableListener());
         tableau.repaint();
         JScrollPane test = new JScrollPane(tableau);
         panTable.add(test, BorderLayout.CENTER);
@@ -121,7 +120,7 @@ public class WindowManager extends JFrame {
         // affichage formulaire
         JPanel panForm = new JPanel();
 
-        panForm.setPreferredSize(new Dimension(400, 400));
+        panForm.setPreferredSize(new Dimension(300, 400));
         panForm.setBackground(Color.white);
 
         panForm.setBorder((BorderFactory.createTitledBorder("Formulaire d'interaction")));
@@ -245,6 +244,14 @@ public class WindowManager extends JFrame {
     }
 
     public void disableFormComponent() {
+        slivre.setText("");
+        sauteurnom.setText("");
+        sauteurprenom.setText("");
+        sparution.setText("");
+        spresentation.setText("");
+        scolonne.setText("");
+        srangee.setText("");
+
         slivre.setEnabled(false);
         sauteurnom.setEnabled(true);
         sauteurprenom.setEnabled(true);
@@ -337,7 +344,24 @@ public class WindowManager extends JFrame {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == ajouterBouton) {
                 applyType = "add";
+                disableFormComponent();
                 enableFormComponent();
+            }
+
+            if (e.getSource() == supprimerBouton) {
+                if (livreSelectionne == -1) {
+                    JOptionPane.showMessageDialog(null, "Veuillez choisir une ligne à supprimer");
+                }
+                else {
+                    System.out.println(livreSelectionne);
+                    bibliotheque.getLivre().remove(livreSelectionne);
+                    System.out.println(bibliotheque.getLivre());
+                    tableModel.fireTableDataChanged();
+                    tableau.repaint();
+                    livreSelectionne = -1;
+                    tableau.getSelectionModel().clearSelection();
+                    disableFormComponent();
+                }
             }
         }
     }
@@ -365,8 +389,9 @@ public class WindowManager extends JFrame {
                 modification = true;
                 tableModel.fireTableDataChanged();
                 tableau.repaint();
+                applyType = "";
             }
-
+            disableFormComponent();
         }
     }
 
@@ -379,7 +404,6 @@ public class WindowManager extends JFrame {
             if (e.getSource() == Sauvegarder) {
                 try {
                     bibliotheque.sauvegarderLivre(path);
-                    modification = false;
                     JOptionPane.showMessageDialog(null, "Votre fichier à bien été sauvegarder");
                 } catch (JAXBException je) {
                     System.out.println("Erreur JAXB : " + e);
@@ -387,16 +411,13 @@ public class WindowManager extends JFrame {
             }
             if (e.getSource() == SauvegarderSous) {
                 JFileChooser chooser = new JFileChooser();// création dun nouveau filechosser
-                chooser.setApproveButtonText("Choix du fichier..."); // intitulé du bouton
-                FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter("xml files (*.xml)", "xml");
-                chooser.setFileFilter(xmlfilter);
+                chooser.setApproveButtonText("Sauvegarder sous"); // intitulé du bouton
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                     try {
                         String thepath = chooser.getSelectedFile().getAbsolutePath();
                         System.out.println(thepath);
-                        bibliotheque.sauvegarderLivre(thepath);
+                        bibliotheque.sauvegarderLivre(thepath+".xml");
                         path = thepath;
-                        modification = false;
                     } catch (JAXBException je) {
                         System.out.println("erreur jaxb : " + je);
                     } catch (Exception t) {
@@ -404,9 +425,18 @@ public class WindowManager extends JFrame {
                     }
                 }
             }
+            modification = false;
         }
     }
-
+    class TableListener implements ListSelectionListener {
+        @Override
+        public void valueChanged(ListSelectionEvent event) {
+            if (!event.getValueIsAdjusting()) {
+                livreSelectionne = tableau.getSelectedRow();
+                System.out.println(livreSelectionne);
+            }
+        }
+    }
 }
 
   
