@@ -69,6 +69,7 @@ public class WindowManager extends JFrame {
         this.setTitle("Gestion Livre");
         this.setSize(700, 500);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.modification = false;
         this.path = "";
         this.initComponent();
@@ -88,6 +89,7 @@ public class WindowManager extends JFrame {
         SauvegarderSous.addActionListener(new EditionListener());
 
         About.add(Info);
+        Info.addActionListener(new InfoListener());
 
         menuBar.add(file);
         menuBar.add(Edition);
@@ -282,7 +284,7 @@ public class WindowManager extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
             if (e.getSource() == close) {
-                String[] options = { "Sauvegarder", "Ne pas sauvegarder", "annuler" };
+                String[] options = { "Sauvegarder", "Ne pas sauvegarder", "annuler" }; //sauvegarder=0; Ne pas sauvegarder=1,; annuler=2;
 
                 if (modification) {
                     int value = JOptionPane.showOptionDialog(null, "Souhaitez-vous vraiment quitter sans sauvegarder",
@@ -404,6 +406,17 @@ public class WindowManager extends JFrame {
                     }
                 }
             }
+        }
+    }
+    class InfoListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+
+            if(e.getSource()==Info)
+            {
+                InfoView info =new InfoView();
+
+            }
+
         }
     }
 

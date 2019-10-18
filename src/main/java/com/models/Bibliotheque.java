@@ -192,6 +192,7 @@ public class Bibliotheque {
         @XmlSchemaType(name = "unsignedByte")
         protected short rangee;
 
+
         /**
          * Obtient la valeur de la propriété titre.
          * 
@@ -200,6 +201,7 @@ public class Bibliotheque {
          *     {@link String }
          *     
          */
+
         public String getTitre() {
             return titre;
         }
