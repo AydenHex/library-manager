@@ -69,15 +69,15 @@ public class WindowManager extends JFrame {
 
     public WindowManager() {
         // caracteristiques de la fenetre
-        this.setTitle("Gestion Livre");
-        this.setSize(700, 500);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.modification = false;
-        this.path = "";
-        this.livreSelectionne = -1;
-        this.initComponent();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Gestion Livre");
+        setSize(500, 500);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        modification = false;
+        path = "";
+        livreSelectionne = -1;
+        initComponent();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public void initComponent() {
@@ -98,7 +98,7 @@ public class WindowManager extends JFrame {
         menuBar.add(file);
         menuBar.add(Edition);
         menuBar.add(About);
-        this.setJMenuBar(menuBar);
+        setJMenuBar(menuBar);
 
         // affichage tableau
         JPanel panTable = new JPanel();
@@ -225,11 +225,11 @@ public class WindowManager extends JFrame {
         JPanel Form = new JPanel();
         Form.add(panForm);
 
-        this.getContentPane().add(control, BorderLayout.SOUTH);
-        this.getContentPane().add(content, BorderLayout.WEST);
-        this.getContentPane().add(Form, BorderLayout.EAST);
+        getContentPane().add(control, BorderLayout.SOUTH);
+        getContentPane().add(content, BorderLayout.WEST);
+        getContentPane().add(Form, BorderLayout.EAST);
 
-        this.disableFormComponent();
+        disableFormComponent();
 
         pack();
     }
@@ -255,8 +255,8 @@ public class WindowManager extends JFrame {
         srangee.setText("");
 
         slivre.setEnabled(false);
-        sauteurnom.setEnabled(true);
-        sauteurprenom.setEnabled(true);
+        sauteurnom.setEnabled(false);
+        sauteurprenom.setEnabled(false);
         sparution.setEnabled(false);
         spresentation.setEnabled(false);
         scolonne.setEnabled(false);
@@ -444,8 +444,7 @@ public class WindowManager extends JFrame {
 
             if(e.getSource()==Info)
             {
-                InfoView info =new InfoView();
-
+                //InfoView info =new InfoView();
             }
 
         }
