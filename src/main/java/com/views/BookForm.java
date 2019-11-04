@@ -36,8 +36,8 @@ public class BookForm extends JPanel {
         title = new JTextField();
         release = new JTextField(3);
         resume = new JTextArea(4, 8);
-        row = new JTextField(1);
-        column = new JTextField(1);
+        row = new JTextField(2);
+        column = new JTextField(2);
 
         writerFirstname = new JTextField();
         writerLastname = new JTextField();
@@ -128,9 +128,14 @@ public class BookForm extends JPanel {
         add(row, c);
 
         c.gridx = 0;
-        c.gridy = 11;
+        c.gridy = 15;
+        c.anchor = GridBagConstraints.LAST_LINE_END;
         lColumn.setFont(font);
         add(lColumn, c);
+        c.gridx = 1;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        column.setPreferredSize(textDimension);
+        add(column, c);
 
         //add(form);
     }

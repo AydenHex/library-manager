@@ -54,24 +54,3 @@ public class InfoView extends JFrame {
 
 }
 
- /* private void initComponentInfo(){
-
-        String htmlFilePath = "C:\\Users\\lrigaudf\\Downloads\\info.html"; // path to your new file
-        File htmlFile = new File(htmlFilePath);
-
-// open the default web browser for the HTML page
-        try {
-            Desktop.getDesktop().browse(htmlFile.toURI());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-// if a web browser is the default HTML handler, this might work too
-        try {
-            Desktop.getDesktop().open(htmlFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-    }*/

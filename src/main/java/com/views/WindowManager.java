@@ -129,11 +129,11 @@ public class WindowManager extends JFrame {
 
         livreLabel = new JLabel("Livre : ");
         parutionLabel = new JLabel("Parution : ");
-        nomAuteurLabel = new JLabel("Nom auteur: ");
+        nomAuteurLabel = new JLabel("abrutie ");
         prenomAuteurLabel = new JLabel("Prenom auteur");
         rangeeLabel = new JLabel("Rangée : ");
         presentationLabel = new JLabel("Présentation : ");
-        colonneLabel = new JLabel("Colonne : ");
+        colonneLabel = new JLabel("CC : ");
 
         slivre = new JTextField();
         sparution = new JTextField();
@@ -273,8 +273,8 @@ public class WindowManager extends JFrame {
         String sColonne = scolonne.getText();
         String sRangee = scolonne.getText();
 
-        if (titre == "" && sAuteurNom == "" && sAuteurPrenom == "" && sParution == "" && sPresentation == ""
-                && sColonne == "" && sRangee == "") {
+        if (titre.equals("") && sAuteurNom.equals("") && sAuteurPrenom.equals("") && sParution.equals("") && sPresentation.equals("")
+                && sColonne.equals("") && sRangee.equals("")) {
             throw new ExceptionForm("Veuillez remplir tout les champs avant de valider");
         }
         if (Integer.parseInt(sColonne) < 1 && Integer.parseInt(sColonne) > 5) {
