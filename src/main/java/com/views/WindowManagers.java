@@ -35,21 +35,15 @@ public class WindowManagers extends JFrame {
     }
 
     private void initCompoennt() {
-        // Add the menu bar
-        menuBar = new MenuBar();
-        setJMenuBar(menuBar);
-
-
-
-        // Create form
-
-
-
         // Add books
         add(table);
         add(form);
         getContentPane().add(table, BorderLayout.WEST);
         getContentPane().add(form, BorderLayout.EAST);
+
+        // Add the menu bar
+        menuBar = new MenuBar(table);
+        setJMenuBar(menuBar);
         
 
     }

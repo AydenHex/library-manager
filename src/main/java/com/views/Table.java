@@ -16,7 +16,7 @@ import javax.swing.table.TableCellRenderer;
 
 import com.models.State;
 
-class Table extends JPanel {
+public class Table extends JPanel {
     /**
      *
      */

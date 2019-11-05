@@ -2,14 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ac9a823-04eb-4da9-9e03-d0731402b8e6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bilbio_test.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eventListeners/OpenListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eventListeners/SaveAsListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eventListeners/SaveListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib-manager.iml" beforeDir="false" afterPath="$PROJECT_DIR$/lib-manager.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/models/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/models/State.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/views/BookForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/views/BookForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/views/InfoView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/views/InfoView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/views/WindowManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/views/WindowManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/views/MenuBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/views/MenuBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/views/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/views/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/views/WindowManagers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/views/WindowManagers.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,13 +42,12 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>biblio</find>
-      <find>modification</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectConfigurationFiles">
@@ -59,51 +61,67 @@
     </option>
   </component>
   <component name="ProjectId" id="1T75e3S4zNBF2Kl21JubfgjC7WK" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SONARLINT_PRECOMMIT_ANALYSIS" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.libmanager.App" />
-      <module name="lib-manager" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.libmanager.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="mvn package" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="mvn" />
+                <option value="package" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
     </configuration>
-    <recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
       <list>
-        <item itemvalue="Application.App" />
+        <serviceView />
       </list>
-    </recent_temporary>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -117,6 +135,7 @@
       <updated>1571298586840</updated>
       <workItem from="1572798387109" duration="4383000" />
       <workItem from="1572828340933" duration="2585000" />
+      <workItem from="1572984591812" duration="844000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1571308757903</created>
@@ -164,5 +183,35 @@
     <MESSAGE value="test" />
     <MESSAGE value="après merge" />
     <option name="LAST_COMMIT_MESSAGE" value="après merge" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="560" y="179" key="#Project_Structure" timestamp="1572982500249">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="560" y="179" key="#Project_Structure/0.0.1920.1035@0.0.1920.1035" timestamp="1572982500249" />
+    <state x="424" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1572982543251">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="424" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1035@0.0.1920.1035" timestamp="1572982543251" />
+    <state x="773" y="230" key="#com.intellij.ide.util.MemberChooser" timestamp="1572985156298">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="773" y="230" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1035@0.0.1920.1035" timestamp="1572985156298" />
+    <state x="748" y="275" key="FileChooserDialogImpl" timestamp="1572982690886">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="748" y="275" key="FileChooserDialogImpl/0.0.1920.1035@0.0.1920.1035" timestamp="1572982690886" />
+    <state x="448" y="95" key="SettingsEditor" timestamp="1572984580046">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="448" y="95" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1572984580046" />
+    <state x="639" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1572984593465">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="639" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1035@0.0.1920.1035" timestamp="1572984593465" />
+    <state x="565" y="70" width="789" height="894" key="find.popup" timestamp="1572984697068">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="565" y="70" width="789" height="894" key="find.popup/0.0.1920.1035@0.0.1920.1035" timestamp="1572984697068" />
   </component>
 </project>

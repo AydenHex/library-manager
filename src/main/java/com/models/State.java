@@ -6,12 +6,15 @@ public class State
     private static State single_instance = null; 
    
     public Bibliotheque bibliotheque;
+    public String path;
+    public Boolean modification;
     public int indiceSelectionned;
   
     // private constructor restricted to this class itself 
     private State() 
     { 
         bibliotheque = new Bibliotheque();
+        modification = false;
         this.indiceSelectionned = -1;
     } 
   

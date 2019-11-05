@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bibliotheque>
+    <livre>
+        <titre>Test</titre>
+        <auteur>
+            <nom>Royer</nom>
+            <prenom>Quentin</prenom>
+        </auteur>
+        <presentation>blablablablabla.</presentation>
+        <parution>2019</parution>
+        <colonne>1</colonne>
+        <rangee>2</rangee>
+    </livre>
+</bibliotheque>

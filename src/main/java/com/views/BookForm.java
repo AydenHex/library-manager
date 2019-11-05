@@ -42,6 +42,8 @@ public class BookForm extends JPanel {
         writerFirstname = new JTextField();
         writerLastname = new JTextField();
 
+        validate = new JButton("Valider");
+
         setLayout(new GridBagLayout());
 
         setBorder((BorderFactory.createTitledBorder("Formulaire d'interaction")));
@@ -136,6 +138,10 @@ public class BookForm extends JPanel {
         c.anchor = GridBagConstraints.FIRST_LINE_START;
         column.setPreferredSize(textDimension);
         add(column, c);
+
+        c.gridx = 0;
+        c.gridy = 21;
+        add(validate, c);
 
         //add(form);
     }
