@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.print.Book;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -49,16 +50,17 @@ public class Table extends JPanel {
         panTable.setBorder((BorderFactory.createTitledBorder("Tableau des livres")));
         jtable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jtable.getSelectionModel().addListSelectionListener(new TableListener());
-        setPreferredSize(new Dimension(500,300));
+        setPreferredSize(new Dimension(500,400));
+        panTable.setPreferredSize(new Dimension(500,500));
         reload();
         panTable.add(jscrollPane, BorderLayout.CENTER);
         setVisible(true);
-        //panTable.setPreferredSize(new Dimension(200, 200));
         add(panTable);
     }
 
     public void reload() {
         tableModel.fireTableDataChanged();
+        jtable.clearSelection();
         jtable.repaint();
     }
 
@@ -67,7 +69,14 @@ public class Table extends JPanel {
         @Override
         public void valueChanged(ListSelectionEvent event) {
             if (!event.getValueIsAdjusting()) {
-                State.getInstance().indiceSelectionned = jtable.getSelectedRow();
+                try {
+                    State.getInstance().indiceSelectionned = jtable.getSelectedRow();
+                    System.out.println(jtable.getSelectedRow());
+                    State.getInstance().form.loadBook(State.getInstance().bibliotheque.getLivre().get(jtable.getSelectedRow()));
+                    State.getInstance().form.enableForm();
+                }
+                catch (ArrayIndexOutOfBoundsException e) { }
+
             }
         }
     }

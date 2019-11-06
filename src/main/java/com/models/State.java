@@ -1,13 +1,17 @@
 package com.models;
 
-public class State 
+import com.views.BookForm;
+
+public class State
 { 
     // static variable single_instance of type State 
     private static State single_instance = null; 
    
     public Bibliotheque bibliotheque;
+    public static BookForm form;
     public String path;
     public Boolean modification;
+    public Boolean addAction;
     public int indiceSelectionned;
   
     // private constructor restricted to this class itself 
@@ -15,6 +19,7 @@ public class State
     { 
         bibliotheque = new Bibliotheque();
         modification = false;
+        addAction = false;
         this.indiceSelectionned = -1;
     } 
   
@@ -25,5 +30,8 @@ public class State
             single_instance = new State(); 
   
         return single_instance; 
-    } 
+    }
+    public static void setBookForm(BookForm bookform) {
+        form = bookform;
+    }
 } 

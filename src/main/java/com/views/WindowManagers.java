@@ -1,5 +1,7 @@
 package com.views;
 
+import com.models.State;
+
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
@@ -17,6 +19,7 @@ public class WindowManagers extends JFrame {
     private MenuBar menuBar;
     private Table table;
     private BookForm form;
+    private ControlButtons control;
 
 
     public WindowManagers() {
@@ -28,7 +31,10 @@ public class WindowManagers extends JFrame {
 
         //Create compoennt
         table = new Table();
-        form = new BookForm();
+        form = new BookForm(this.table);
+        control = new ControlButtons(this.form, this.table);
+
+        State.setBookForm(form);
 
         //Init child component
         initCompoennt();
@@ -38,8 +44,10 @@ public class WindowManagers extends JFrame {
         // Add books
         add(table);
         add(form);
+        add(control);
         getContentPane().add(table, BorderLayout.WEST);
         getContentPane().add(form, BorderLayout.EAST);
+        getContentPane().add(control, BorderLayout.SOUTH);
 
         // Add the menu bar
         menuBar = new MenuBar(table);

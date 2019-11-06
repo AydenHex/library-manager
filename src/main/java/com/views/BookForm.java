@@ -1,9 +1,11 @@
 package com.views;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import com.models.Bibliotheque;
+import com.models.State;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -20,8 +22,11 @@ public class BookForm extends JPanel {
     private JButton validate;
     private Font font;
     private Dimension textDimension;
+    private boolean statut;
+    private String action;
+    private Table table;
 
-    public BookForm() {
+    public BookForm(Table table) {
         font = new Font("Verdana", Font.PLAIN, 14);
         textDimension = new Dimension(100, 20);
 
@@ -42,14 +47,35 @@ public class BookForm extends JPanel {
         writerFirstname = new JTextField();
         writerLastname = new JTextField();
 
+        this.table = table;
+
         validate = new JButton("Valider");
+        validate.addActionListener(new BookFormListener());
 
         setLayout(new GridBagLayout());
 
         setBorder((BorderFactory.createTitledBorder("Formulaire d'interaction")));
         setPreferredSize(new Dimension(250, 400));
+        this.action = "";
 
         initComponent();
+        this.disableForm();
+    }
+
+    public void disableForm() {
+        for (Component component : this.getComponents()) {
+            component.setEnabled(false);
+        }
+        this.setEnabled(false);
+        this.statut = false;
+    }
+
+    public void enableForm() {
+        for (Component component : this.getComponents()) {
+            component.setEnabled(true);
+        }
+        this.setEnabled(true);
+        this.statut = true;
     }
 
     public void initComponent() {
@@ -145,4 +171,53 @@ public class BookForm extends JPanel {
 
         //add(form);
     }
+    public Boolean getStatus() {
+        return this.statut;
+    }
+    public String getAction() {
+        return this.action;
+    }
+    public void setAction(String value) {
+        this.action = value;
+    }
+    public Bibliotheque.Livre generateBook() {
+        Bibliotheque.Livre livre = new Bibliotheque.Livre();
+        Bibliotheque.Livre.Auteur auteur = new Bibliotheque.Livre.Auteur();
+
+        auteur.setNom(writerLastname.getText());
+        auteur.setPrenom(writerFirstname.getText());
+
+        livre.setTitre(title.getText());
+        livre.setAuteur(auteur);
+        livre.setPresentation(resume.getText());
+        livre.setParution(Integer.parseInt(release.getText()));
+        livre.setColonne(Short.parseShort(column.getText()));
+        livre.setRangee(Short.parseShort(row.getText()));
+
+        return livre;
+    }
+
+    public void loadBook(Bibliotheque.Livre livre) {
+        title.setText(livre.getTitre());
+        writerFirstname.setText(livre.getAuteur().getPrenom());
+        writerLastname.setText(livre.getAuteur().getNom());
+        resume.setText(livre.getPresentation());
+        release.setText(Integer.toString(livre.getParution()));
+        column.setText(Short.toString(livre.getColonne()));
+        row.setText(Short.toString(livre.getRangee()));
+    }
+    public class BookFormListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            if (State.getInstance().addAction) {
+                State.getInstance().bibliotheque.getLivre().add(generateBook());
+            } else {
+                State.getInstance().bibliotheque.getLivre().set(State.getInstance().indiceSelectionned, generateBook());
+            }
+            table.reload();
+            disableForm();
+            State.getInstance().modification = true;
+        }
+    }
+
 }

@@ -3,10 +3,11 @@ package com.views;
 import com.eventListeners.OpenListener;
 import com.eventListeners.SaveAsListener;
 import com.eventListeners.SaveListener;
+import com.models.State;
 
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.xml.bind.JAXBException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -45,7 +46,48 @@ public class MenuBar extends JMenuBar {
         this.close.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                System.exit(0);
+                if (State.getInstance().modification) {
+                    String[] options = {"Sauvegarder", "Annuler", "Quitter sans sauvegarder"};
+                    int x = JOptionPane.showOptionDialog(null,
+                            "Vous avez des modifications en cours...",
+                            "",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                            null,
+                            options,
+                            options[0]);
+                    switch (x) {
+                        case 0:
+                            try{
+                                if (State.getInstance().path != null) {
+                                    State.getInstance().bibliotheque.sauvegarderLivre(State.getInstance().path);
+                                    State.getInstance().modification = false;
+                                    JOptionPane.showMessageDialog(null, "Votre fichier à bien été sauvegarder");
+                                }
+                                else {
+                                    JFileChooser chooser = new JFileChooser();// création dun nouveau filechosser
+                                    chooser.setApproveButtonText("Choix du fichier..."); // intitulé du bouton
+                                    FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter("xml files (*.xml)", "xml");
+                                    chooser.setFileFilter(xmlfilter);
+                                    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                                        String thepath = chooser.getSelectedFile().getAbsolutePath();
+                                        System.out.println(thepath);
+                                        State.getInstance().bibliotheque.sauvegarderLivre(thepath + ".xml");
+                                        State.getInstance().path = thepath;
+                                        State.getInstance().modification = false;
+                                        JOptionPane.showMessageDialog(null, "Votre fichier à bien été sauvegarder");
+                                    }
+                                }
+                                System.exit(0);
+                            } catch (JAXBException je) {
+                                System.out.println("Erreur JAXB : " + je);
+                            }
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            System.exit(0);
+                    }
+                }
             }
         });
 

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3ac9a823-04eb-4da9-9e03-d0731402b8e6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bilbio_test.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/eventListeners/OpenListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/eventListeners/SaveAsListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/eventListeners/SaveListener.java" afterDir="false" />
+    <list default="true" id="3ac9a823-04eb-4da9-9e03-d0731402b8e6" name="Default Changelist" comment="après merge">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eventListeners/AddBookListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/views/ControlButtons.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/models/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/models/State.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/views/BookForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/views/BookForm.java" afterDir="false" />
@@ -135,7 +133,9 @@
       <updated>1571298586840</updated>
       <workItem from="1572798387109" duration="4383000" />
       <workItem from="1572828340933" duration="2585000" />
-      <workItem from="1572984591812" duration="844000" />
+      <workItem from="1572984591812" duration="1018000" />
+      <workItem from="1573025803972" duration="5428000" />
+      <workItem from="1573031724021" duration="2734000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1571308757903</created>
@@ -151,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571312379673</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="après merge">
+      <created>1572985582506</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1572985582506</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView">
@@ -193,10 +200,10 @@
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
     <state x="424" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1035@0.0.1920.1035" timestamp="1572982543251" />
-    <state x="773" y="230" key="#com.intellij.ide.util.MemberChooser" timestamp="1572985156298">
+    <state x="773" y="230" key="#com.intellij.ide.util.MemberChooser" timestamp="1573031013675">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state x="773" y="230" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1035@0.0.1920.1035" timestamp="1572985156298" />
+    <state x="773" y="230" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1035@0.0.1920.1035" timestamp="1573031013675" />
     <state x="748" y="275" key="FileChooserDialogImpl" timestamp="1572982690886">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
@@ -205,10 +212,14 @@
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
     <state x="448" y="95" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1572984580046" />
-    <state x="639" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1572984593465">
+    <state x="560" y="254" key="Vcs.Push.Dialog.v2" timestamp="1572985596082">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state x="639" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1035@0.0.1920.1035" timestamp="1572984593465" />
+    <state x="560" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1035@0.0.1920.1035" timestamp="1572985596082" />
+    <state x="639" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1573031772108">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="639" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1035@0.0.1920.1035" timestamp="1573031772108" />
     <state x="565" y="70" width="789" height="894" key="find.popup" timestamp="1572984697068">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
